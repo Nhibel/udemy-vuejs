@@ -8,14 +8,15 @@
 </head>
 <body>
     <div id="app">
-        {{chaine}} - {{date}}
+        {{chaine.split('').reverse().join('')}} <br>
+        {{date.getHours()}}:{{date.getMinutes()}}:{{date.getSeconds()}}
     </div>
     <script>
         new Vue({
             el: '#app', 
             data: {
                 chaine: 'Une simple chaîne',
-                date: Date.now()
+                date: new Date
             }
         })
     </script>
