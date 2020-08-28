@@ -8,13 +8,19 @@
 </head>
 <body>
     <div id="app">
-        {{inter? 'Vrai' : 'Faux'}}
+       {{heure}}
     </div>
+    
     <script>
         new Vue({
             el: '#app', 
             data: {
-                inter: true
+               hms: new Date()
+            },
+            computed: {
+                heure: function() {
+                    return this.hms.getHours() + ":" + this.hms.getMinutes() + ":" + this.hms.getSeconds();
+                }
             }
         })
     </script>
