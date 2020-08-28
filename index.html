@@ -8,25 +8,29 @@
 </head>
 <body>
     <div id="app">
-        nom : <span v-text='personne.nom'></span>, 
-        prenom : <span v-text='personne.prenom'></span>, 
-        âge : <span v-text='personne.age'></span>
+        {{heures}}:{{minutes}}:{{secondes}}
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                personne: {
-                    "nom": "Wayne",
-                    "prenom": "Bruce",
-                    "age": 30
-                }
+               heures: '',
+               minutes: '', 
+               secondes: ''
             }
         });
-        setTimeout(function() {
-            vm.personne.age = 40
-        }, 3000)
-    </script>
+
+        setInterval(function() {
+            var date = new Date();
+            vm.heures = ('0'+date.getHours()).slice(-2);
+            vm.minutes = ('0'+date.getMinutes()).slice(-2);
+            vm.secondes = ('0'+date.getSeconds()).slice(-2);
+        });
+
+        
+    </script> 
 </body>
 </html>
+
+<!-- afficher une horloge qui change tous les secondes -->
