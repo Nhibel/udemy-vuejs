@@ -8,28 +8,18 @@
 </head>
 <body>
     <div id="app">
-       {{heure}}<br>
-       {{heure2()}}
+        <img v-bind:src="adresse">
+        <img :src="adresse">
+        <div :id='idDuDiv'></div>
     </div>
-
     <script>
         new Vue({
-            el: '#app', 
+            el: '#app',
             data: {
-               hms: new Date()
-            },
-            computed: {
-                heure: function() {
-                    return this.hms.getHours() + ":" + this.hms.getMinutes() + ":" + this.hms.getSeconds();
-                }
-            },
-            methods: {
-                heure2: function() {
-                    return this.hms.getHours() + ":" + this.hms.getMinutes() + ":" + this.hms.getSeconds();
-                }
+                adresse: 'https://upload.wikimedia.org/wikipedia/commons/c/c9/Moon.jpg',
+                idDuDiv: 'leDiv'
             }
         })
     </script>
-    
 </body>
 </html>
