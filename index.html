@@ -8,18 +8,25 @@
 </head>
 <body>
     <div id="app">
-        <img v-bind:src="adresse">
-        <img :src="adresse">
-        <div :id='idDuDiv'></div>
+        nom : <span v-text='personne.nom'></span>, 
+        prenom : <span v-text='personne.prenom'></span>, 
+        âge : <span v-text='personne.age'></span>
     </div>
+
     <script>
-        new Vue({
+        var vm = new Vue({
             el: '#app',
             data: {
-                adresse: 'https://upload.wikimedia.org/wikipedia/commons/c/c9/Moon.jpg',
-                idDuDiv: 'leDiv'
+                personne: {
+                    "nom": "Wayne",
+                    "prenom": "Bruce",
+                    "age": 30
+                }
             }
-        })
+        });
+        setTimeout(function() {
+            vm.personne.age = 40
+        }, 3000)
     </script>
 </body>
 </html>
