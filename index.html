@@ -8,18 +8,21 @@
 </head>
 <body>
     <div id="app">
-        <div v-html="contenu[0]"></div>
-        <div v-html="contenu[1]"></div>
+       <!-- <p>Nombre de click sur le bouton : {{compteur}}</p><button @click=btnClic>Cliquez ici</button> -->
+       <p>Nombre de click sur le bouton : {{compteur}}</p><button @click=compteur++>Cliquez ici</button>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                contenu: ['<img src="https://www.zooplus.fr/magazine/wp-content/uploads/2019/06/arriv%C3%A9e-dun-chaton-%C3%A0-la-maison.jpeg" height=250px>',
-                            '<table border><tr><th>Colonne 1</th><th>Colonne 2</th></tr>\
-                            <tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr>']
-            },
+                compteur: 0
+            }, 
+            methods: {
+                btnClic: function(event) {
+                    this.compteur = this.compteur+1
+                }
+            }
         });
     </script> 
 </body>
