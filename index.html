@@ -8,30 +8,23 @@
 </head>
 <body>
     <div id="app">
-        Vous avez choisi {{selection}}<br>
-
-        <select v-model="selection">
-            <option>Paris</option>
-            <option>Londres</option>
-            <option>Bruxelles</option>
-        </select>
-        <br>
-
-        <div style="white-space: pre-line;">{{multi}}</div>
-        <textarea v-model="multi" cols="40" rows="7"></textarea>
+        <input v-on:keyup="txtToMaj()" v-model="txt" type="text">
+        <input type="text" :value="txtUpperCase">
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                nom: '',
-                selection: '',
-                multi: ''
-            }
-        });        
+                txt:'',
+                txtUpperCase:''
+            },
+            methods: {
+                txtToMaj: function() {
+                    vm.txtUpperCase = vm.txt.toUpperCase();
+                }
+            },
+        });
     </script> 
 </body>
 </html>
-
-<!-- afficher une horloge qui change tous les secondes -->
