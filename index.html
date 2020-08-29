@@ -8,27 +8,28 @@
 </head>
 <body>
     <div id="app">
-        {{heures}}:{{minutes}}:{{secondes}}
+        Vous avez choisi {{selection}}<br>
+
+        <select v-model="selection">
+            <option>Paris</option>
+            <option>Londres</option>
+            <option>Bruxelles</option>
+        </select>
+        <br>
+
+        <div style="white-space: pre-line;">{{multi}}</div>
+        <textarea v-model="multi" cols="40" rows="7"></textarea>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-               heures: '',
-               minutes: '', 
-               secondes: ''
+                nom: '',
+                selection: '',
+                multi: ''
             }
-        });
-
-        setInterval(function() {
-            var date = new Date();
-            vm.heures = ('0'+date.getHours()).slice(-2);
-            vm.minutes = ('0'+date.getMinutes()).slice(-2);
-            vm.secondes = ('0'+date.getSeconds()).slice(-2);
-        });
-
-        
+        });        
     </script> 
 </body>
 </html>

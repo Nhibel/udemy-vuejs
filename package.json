@@ -1,16 +1,25 @@
 {
   "name": "code",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	"start": "lite-server"
+    "start": "lite-server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lite-server": "^2.5.4"
-  }
+    "lite-server": "^2.5.4",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nhibel/udemy-vuejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Nhibel/udemy-vuejs/issues"
+  },
+  "homepage": "https://github.com/Nhibel/udemy-vuejs#readme",
+  "description": ""
 }
