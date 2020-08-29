@@ -8,23 +8,44 @@
 </head>
 <body>
     <div id="app">
-        <input v-on:keyup="txtToMaj()" v-model="txt" type="text">
-        <input type="text" :value="txtUpperCase">
+        <p>Cochez les cases des langages que vous connaissez : </p>
+        <input type="checkbox" id="html" v-model="checked" value="HTML">
+        <label for="html">HTML</label>
+
+        <input type="checkbox" id="css" v-model="checked" value="CSS">
+        <label for="css">CSS</label>
+
+        <input type="checkbox" id="js" v-model="checked" value="JavaScript">
+        <label for="js">JavaScript</label>
+
+        <p>Cases cochées : {{checked}}</p>
+
+        <p>Quel est votre langage préféré ?</p>
+
+        <input type="radio" id="html" v-model="radioChecked" value="HTML">
+        <label for="html">HTML</label>
+
+        <input type="radio" id="css" v-model="radioChecked" value="CSS">
+        <label for="html">CSS</label>
+
+        <input type="radio" id="js" v-model="radioChecked" value="JavaScript">
+        <label for="js">JavaScript</label>
+
+        <p>Langage préféré : {{radioChecked}}</p>
+
+        
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                txt:'',
-                txtUpperCase:''
-            },
-            methods: {
-                txtToMaj: function() {
-                    vm.txtUpperCase = vm.txt.toUpperCase();
-                }
+                checked: [],
+                radioChecked:''
             },
         });
+        
+        
     </script> 
 </body>
 </html>
