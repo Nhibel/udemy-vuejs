@@ -8,44 +8,19 @@
 </head>
 <body>
     <div id="app">
-        <p>Cochez les cases des langages que vous connaissez : </p>
-        <input type="checkbox" id="html" v-model="checked" value="HTML">
-        <label for="html">HTML</label>
-
-        <input type="checkbox" id="css" v-model="checked" value="CSS">
-        <label for="css">CSS</label>
-
-        <input type="checkbox" id="js" v-model="checked" value="JavaScript">
-        <label for="js">JavaScript</label>
-
-        <p>Cases cochées : {{checked}}</p>
-
-        <p>Quel est votre langage préféré ?</p>
-
-        <input type="radio" id="html" v-model="radioChecked" value="HTML">
-        <label for="html">HTML</label>
-
-        <input type="radio" id="css" v-model="radioChecked" value="CSS">
-        <label for="html">CSS</label>
-
-        <input type="radio" id="js" v-model="radioChecked" value="JavaScript">
-        <label for="js">JavaScript</label>
-
-        <p>Langage préféré : {{radioChecked}}</p>
-
-        
+        <div v-html="contenu[0]"></div>
+        <div v-html="contenu[1]"></div>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                checked: [],
-                radioChecked:''
+                contenu: ['<img src="https://www.zooplus.fr/magazine/wp-content/uploads/2019/06/arriv%C3%A9e-dun-chaton-%C3%A0-la-maison.jpeg" height=250px>',
+                            '<table border><tr><th>Colonne 1</th><th>Colonne 2</th></tr>\
+                            <tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr>']
             },
         });
-        
-        
     </script> 
 </body>
 </html>
