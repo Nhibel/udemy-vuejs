@@ -11,6 +11,8 @@
       <input v-model="txt" type="text">
       <input type="button" @click=showAlert('Bonjour') value="Bonjour">
       <input type="button" @click=showAlert('Hello') value="Hello">
+      <p>X = {{pos.xpos}}</p> <p>Y = {{pos.ypos}}</p>
+      <img src="https://www.wanimo.com/veterinaire/wp-content/uploads/2015/03/images_articles_chat_chaton-sourire@2x.jpg" height="250px" @mousemove=showCoordinates($event)>
     </div>
 
     <script>
@@ -18,10 +20,16 @@
             el: '#app',
             data: {
                 txt: '',
+                pos: {
+                    xpos:'',
+                    ypos:''
+                },
+                
             }, 
             methods: {
-                showAlert: function(msg) {
-                    alert(msg + " " + vm.txt);
+                showCoordinates: function(event) {
+                    this.pos.xpos = event.offsetX;
+                    this.pos.ypos = event.offsetY;
                 }
             }
         });
