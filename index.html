@@ -8,14 +8,13 @@
 </head>
 <body>
     <div id="app">
-        <div @keydown=actionParent>
-            <input type="text" @keydown.prevent.stop=action($event)>
-        </div>
-
-        <br>
-
-        <img src="https://www.vetostore.com/media/wysiwyg/img_fiche_conseil/conseil-chat-sexe_chaton-1.jpg" div="petit-chat" :width="width" @click.left=changeWidth(200) @click.right=changeWidth(100)>
+        <p>Quels langages de programmation connaissez-vous ?</p>
+        <form>
+            <input type="text" v-model="txt">
+            <input type="button" value="Envoyez" @click=send()>
+        </form>
         
+        {{tableau}}
       
     </div>
 
@@ -23,17 +22,13 @@
         var vm = new Vue({
             el: '#app',
             data: {
-                width: "300px"
+                txt: '',
+                tableau: []
             },
             methods: {
-                action: function(event) {
-                    console.log('Evènement traité dans le input');
-                }, 
-                actionParent: function() {
-                    console.log("Evènement propagé jusqu'au div");
-                },
-                changeWidth: function(width) {
-                    this.width = width;
+                send: function() {
+                    this.tableau.push(this.txt)
+                    this.txt = ''
                 }
             }
         });
