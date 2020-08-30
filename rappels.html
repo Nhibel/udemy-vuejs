@@ -27,11 +27,13 @@ Définir dans data une variable ayant pour nom txt
 
 Afficher le contenu d'une variable
 
+    <!-- 
     <p>{{variable}}</p>
 
     data: {
         variable: 'Du texte'
-    }, 
+    },  
+    -->
     
 <!-- ////////////////////////////////////////////////////////////////////////////// -->
 
@@ -53,6 +55,19 @@ Appeler une méthode lors d'un clic
         });
     </script>
 
+-->
+
+<!-- ////////////////////////////////////////////////////////////////////////////// -->
+
+Passer un argument lors de l'appel d'une méthode
+<!--    
+    <input type="button" @click=showAlert('Hello') value="Hello">
+        /////////////////////////////////////////////////////////////////////////
+        methods: {
+                showAlert: function(msg) {
+                    alert(msg + " " + vm.txt);
+                }
+            }
 -->
 
 <!-- ////////////////////////////////////////////////////////////////////////////// -->

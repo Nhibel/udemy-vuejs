@@ -9,7 +9,8 @@
 <body>
     <div id="app">
       <input v-model="txt" type="text">
-      <button type="button" @click=showAlert>Cliquez-moi</button>
+      <input type="button" @click=showAlert('Bonjour') value="Bonjour">
+      <input type="button" @click=showAlert('Hello') value="Hello">
     </div>
 
     <script>
@@ -19,8 +20,8 @@
                 txt: '',
             }, 
             methods: {
-                showAlert: function() {
-                    alert("Bonjour " + vm.txt);
+                showAlert: function(msg) {
+                    alert(msg + " " + vm.txt);
                 }
             }
         });
