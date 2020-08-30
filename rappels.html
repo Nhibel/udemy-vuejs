@@ -1,0 +1,58 @@
+ Structure vusJs
+ <!-- <div id="app">
+      <div> blablabla </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+               variable: ''
+            }, 
+            methods: {
+                maMethode: function() {
+                    doSomething
+                }
+            }
+        });
+    </script>  -->
+
+<!-- ////////////////////////////////////////////////////////////////////////////// -->
+
+Récupérer le contenu tapé dans l'input avec v-model
+     <!-- <input v-model="txt" type="text"> -->
+Définir dans data une variable ayant pour nom txt
+
+<!-- ////////////////////////////////////////////////////////////////////////////// -->
+
+Afficher le contenu d'une variable
+
+    <p>{{variable}}</p>
+
+    data: {
+        variable: 'Du texte'
+    }, 
+    
+<!-- ////////////////////////////////////////////////////////////////////////////// -->
+
+Appeler une méthode lors d'un clic
+<!--  
+    <button type="button" @click=showAlert>Cliquez-moi</button> 
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+               variable: ''
+            }, 
+            methods: {
+                showAlert: function() {
+                    doSomething
+                }
+            }
+        });
+    </script>
+
+-->
+
+<!-- ////////////////////////////////////////////////////////////////////////////// -->

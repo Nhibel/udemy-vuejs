@@ -8,19 +8,19 @@
 </head>
 <body>
     <div id="app">
-       <!-- <p>Nombre de click sur le bouton : {{compteur}}</p><button @click=btnClic>Cliquez ici</button> -->
-       <p>Nombre de click sur le bouton : {{compteur}}</p><button @click=compteur++>Cliquez ici</button>
+      <input v-model="txt" type="text">
+      <button type="button" @click=showAlert>Cliquez-moi</button>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                compteur: 0
+                txt: '',
             }, 
             methods: {
-                btnClic: function(event) {
-                    this.compteur = this.compteur+1
+                showAlert: function() {
+                    alert("Bonjour " + vm.txt);
                 }
             }
         });
