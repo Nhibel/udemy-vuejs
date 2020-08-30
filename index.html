@@ -8,30 +8,28 @@
 </head>
 <body>
     <div id="app">
-      <input v-model="txt" type="text">
-      <input type="button" @click=showAlert('Bonjour') value="Bonjour">
-      <input type="button" @click=showAlert('Hello') value="Hello">
-      <p>X = {{pos.xpos}}</p> <p>Y = {{pos.ypos}}</p>
-      <img src="https://www.wanimo.com/veterinaire/wp-content/uploads/2015/03/images_articles_chat_chaton-sourire@2x.jpg" height="250px" @mousemove=showCoordinates($event)>
+        <div>
+            <form>
+                <input type="number" v-model=nombre>
+                <input type=submit @click=calculCarre($event)></button>
+            </form>
+        </div>
+        
+      
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                txt: '',
-                pos: {
-                    xpos:'',
-                    ypos:''
-                },
-                
-            }, 
+                nombre: null
+            },
             methods: {
-                showCoordinates: function(event) {
-                    this.pos.xpos = event.offsetX;
-                    this.pos.ypos = event.offsetY;
-                }
-            }
+                calculCarre: function(event) {
+                    // empêche la page de se recharger
+                    event.preventDefault();
+                    this.nombre = this.nombre * this.nombre;
+                }}
         });
     </script> 
 </body>
