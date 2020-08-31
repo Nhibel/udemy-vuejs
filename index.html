@@ -6,14 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-
-        <input v-model="txt" type="text" v-on:keyup="action($event)">
-        <input type="button" value="clic" v-on:click="action($event)">
-
+        <div v-cloak>
+            {{texte}}
+        </div>
     </div>
 
     <script>
@@ -23,11 +27,7 @@
                 txt: ''
             },
             methods: {
-                action: function (event) {
-                    if (event.key == "Enter" || event.type == 'click') {
-                        this.txt = this.txt.toUpperCase();
-                    }
-                }
+
             }
         });
     </script>
