@@ -7,29 +7,37 @@
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
-        .gras {
-            font-weight: bold;
-        }
-
-        .italique {
-            font-style: italic;
-        }
-
-        .souligne {
-            text-decoration: underline;
+        .blue {
+            color: blue;
         }
     </style>
+
 </head>
 
 <body>
     <div id="app">
-        <input type="checkbox" @click="g=!g"> Gras
-        <input type="checkbox" @click="i=!i"> Italique
-        <input type="checkbox" @click="s=!s"> Souligné
+        <div>
+            Couleur:
+            <select v-model="c">
+                <option value="black">Noir</option>
+                <option value="blue">Bleu</option>
+                <option value="green">Vert</option>
+                <option value="blue"> Rouge</option>
+            </select>
 
-        <!-- g:gras on applique la classe gras si g == true -->
-        <div v-bind:class="{gras:g, italique:i, souligne:s}">
-            Un peu de texte dans le div
+            Taille:
+            <select v-model="s">
+                <option value="10px">10px</option>
+                <option value="15px">15px</option>
+                <option value="20px">20px</option>
+                <option value="25px">25px</option>
+            </select>
+
+            <div v-bind:style="{color: c, fontSize: s}">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis similique, error veniam ratione
+                officiis, id aspernatur voluptates a ducimus consequuntur molestiae, nostrum dolorum? Sit adipisci
+                officia magni tempore eos earum!
+            </div>
         </div>
     </div>
 
@@ -37,14 +45,10 @@
         var vm = new Vue({
             el: '#app',
             data: {
-                g: false,
-                i: false,
-                s: false
-
+                c: 'black',
+                s: '10px'
             },
-            methods: {
-
-            }
+            methods: {}
         });
     </script>
 </body>
