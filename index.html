@@ -7,50 +7,43 @@
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
-        li {
-            list-style-type: none;
+        .gras {
+            font-weight: bold;
         }
 
-        .black {
-            color: black;
+        .italique {
+            font-style: italic;
         }
 
-        .red {
-            color: red;
+        .souligne {
+            text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <p>Quel langages de programmation connaissez-vous ?</p>
-        <input type="text" placeholder="Entrez un langage" v-model="langage" />
-        <input type="button" value="Valider" @click="traitement" />
-        <br>
+        <input type="checkbox" @click="g=!g"> Gras
+        <input type="checkbox" @click="i=!i"> Italique
+        <input type="checkbox" @click="s=!s"> Souligné
 
-        <ul>
-            <li v-for="el in liste">
-                <input type="checkbox" @click="el.cac=!el.cac">
-                <span v-bind:class="{red:el.cac}">{{el.lang}}</span>
-            </li>
-        </ul>
-
+        <!-- g:gras on applique la classe gras si g == true -->
+        <div v-bind:class="{gras:g, italique:i, souligne:s}">
+            Un peu de texte dans le div
+        </div>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                langage: "",
-                liste: []
+                g: false,
+                i: false,
+                s: false
+
             },
             methods: {
-                traitement: function () {
-                    this.liste.push({
-                        lang: this.langage,
-                        cac: false
-                    });
-                }
+
             }
         });
     </script>
