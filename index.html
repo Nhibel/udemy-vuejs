@@ -8,28 +8,36 @@
 </head>
 <body>
     <div id="app">
-        <input type="radio" value="click" v-model="choix" checked> Simple clic
-        <input type="radio" value="dblclick" v-model="choix"> Double clic
-        <br>
-        <img v-bind:src="image" v-on:[choix]="change" width="300">
+      <ul>
+          <li v-for="personne in personnes"><p>{{personne.prenom}} {{personne.nom}}, {{personne.age}} an(s)</p></li>
+      </ul>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                image: 'https://mainsdanslaterre.com/wp-content/uploads/2017/05/image-de-petit-chat-mignon.jpg',
-                choix: 'click'
-               
+                personnes: [
+                    {
+                        "prenom": "Camille",
+                        "nom": "Devos",
+                        "age": 35
+
+                    },
+                    {
+                        "prenom": "Aurélia",
+                        "nom": "Bzf",
+                        "age": 35
+                    },
+                    {
+                        "prenom": "Nate",
+                        "nom": "Devos",
+                        "age": 1
+                    }
+                ]
             },
             methods: {
-               change: function() {
-                   if (this.image.indexOf('chat') != -1) {
-                        this.image = 'https://educanin.com/wp-content/uploads/2017/08/chien-cute.jpg'
-                   } else {
-                        this.image ='https://mainsdanslaterre.com/wp-content/uploads/2017/05/image-de-petit-chat-mignon.jpg'
-                   }
-               }
+
             }
         });
     </script> 
