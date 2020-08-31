@@ -7,8 +7,8 @@
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
-        .blue {
-            color: blue;
+        li {
+            list-style-type: none;
         }
     </style>
 
@@ -16,39 +16,35 @@
 
 <body>
     <div id="app">
-        <div>
-            Couleur:
-            <select v-model="c">
-                <option value="black">Noir</option>
-                <option value="blue">Bleu</option>
-                <option value="green">Vert</option>
-                <option value="blue"> Rouge</option>
-            </select>
-
-            Taille:
-            <select v-model="s">
-                <option value="10px">10px</option>
-                <option value="15px">15px</option>
-                <option value="20px">20px</option>
-                <option value="25px">25px</option>
-            </select>
-
-            <div v-bind:style="{color: c, fontSize: s}">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis similique, error veniam ratione
-                officiis, id aspernatur voluptates a ducimus consequuntur molestiae, nostrum dolorum? Sit adipisci
-                officia magni tempore eos earum!
-            </div>
-        </div>
+        <input type="text" v-model="langage">
+        <input type="button" value="Ajouter" @click="ajouter">
+        <br>
+        <ul>
+            <li v-for="el in liste">
+                <input type="checkbox" @click="el.coche=!el.coche">
+                {{el.langage}} est <span v-if="el.coche">coché</span> <span v-else="!el.coche">décoché</span>
+            </li>
+        </ul>
     </div>
+
+
+
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                c: 'black',
-                s: '10px'
+                langage: '',
+                liste: []
             },
-            methods: {}
+            methods: {
+                ajouter: function () {
+                    this.liste.push({
+                        langage: this.langage,
+                        coche: false
+                    });
+                }
+            }
         });
     </script>
 </body>
