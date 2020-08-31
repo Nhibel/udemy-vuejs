@@ -6,23 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        li {
+            list-style-type: none;
+        }
+
+        .black {
+            color: black;
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <p v-once>avec v-once : {{nombre}}</p>
-        <p>sans v-once : {{nombre}}</p>
-        <input type="button" value="clic" @click="nombre++">
+        <p>Quel langages de programmation connaissez-vous ?</p>
+        <input type="text" placeholder="Entrez un langage" v-model="langage" />
+        <input type="button" value="Valider" @click="traitement" />
+        <br>
+
+        <ul>
+            <li v-for="el in liste">
+                <input type="checkbox" @click="el.cac=!el.cac">
+                <span v-bind:class="{red:el.cac}">{{el.lang}}</span>
+            </li>
+        </ul>
+
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                nombre: 15
+                langage: "",
+                liste: []
             },
             methods: {
-
+                traitement: function () {
+                    this.liste.push({
+                        lang: this.langage,
+                        cac: false
+                    });
+                }
             }
         });
     </script>
