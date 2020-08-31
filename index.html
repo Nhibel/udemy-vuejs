@@ -8,39 +8,28 @@
 </head>
 <body>
     <div id="app">
-        <p>Quels langages de programmation connaissez-vous ?</p>
-        
-        {{tableau}}
-
-        <ul>
-            <li v-for="(element, index) in tableau">{{element}}</li>
-        </ul>
-
-
-            <div v-for="(elm, index) in elms">
-                {{elm}}
-                <button @click=supprime(index)>Supprimer</button>
-            </div>
-
-      
+        <input type="radio" value="click" v-model="choix" checked> Simple clic
+        <input type="radio" value="dblclick" v-model="choix"> Double clic
+        <br>
+        <img v-bind:src="image" v-on:[choix]="change" width="300">
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                txt: '',
-                tableau: [],
-                elms: ['premier', 'deuxième', 'troisième', 'quatrième']
+                image: 'https://mainsdanslaterre.com/wp-content/uploads/2017/05/image-de-petit-chat-mignon.jpg',
+                choix: 'click'
+               
             },
             methods: {
-                send: function() {
-                    this.tableau.push(this.txt)
-                    this.txt = ''
-                },
-                supprime: function(index) {
-                    this.elms.splice(index, 1)
-                }
+               change: function() {
+                   if (this.image.indexOf('chat') != -1) {
+                        this.image = 'https://educanin.com/wp-content/uploads/2017/08/chien-cute.jpg'
+                   } else {
+                        this.image ='https://mainsdanslaterre.com/wp-content/uploads/2017/05/image-de-petit-chat-mignon.jpg'
+                   }
+               }
             }
         });
     </script> 
