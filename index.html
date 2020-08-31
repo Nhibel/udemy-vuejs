@@ -1,45 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
     <div id="app">
-      <ul>
-          <li v-for="personne in personnes"><p>{{personne.prenom}} {{personne.nom}}, {{personne.age}} an(s)</p></li>
-      </ul>
+
+        <input v-model="txt" type="text" v-on:keyup="action($event)">
+        <input type="button" value="clic" v-on:click="action($event)">
+
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                personnes: [
-                    {
-                        "prenom": "Camille",
-                        "nom": "Devos",
-                        "age": 35
-
-                    },
-                    {
-                        "prenom": "Aurélia",
-                        "nom": "Bzf",
-                        "age": 35
-                    },
-                    {
-                        "prenom": "Nate",
-                        "nom": "Devos",
-                        "age": 1
-                    }
-                ]
+                txt: ''
             },
             methods: {
-
+                action: function (event) {
+                    if (event.key == "Enter" || event.type == 'click') {
+                        this.txt = this.txt.toUpperCase();
+                    }
+                }
             }
         });
-    </script> 
+    </script>
 </body>
+
 </html>
