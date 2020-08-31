@@ -9,12 +9,19 @@
 <body>
     <div id="app">
         <p>Quels langages de programmation connaissez-vous ?</p>
-        <form>
-            <input type="text" v-model="txt">
-            <input type="button" value="Envoyez" @click=send()>
-        </form>
         
         {{tableau}}
+
+        <ul>
+            <li v-for="(element, index) in tableau">{{element}}</li>
+        </ul>
+
+
+            <div v-for="(elm, index) in elms">
+                {{elm}}
+                <button @click=supprime(index)>Supprimer</button>
+            </div>
+
       
     </div>
 
@@ -23,12 +30,16 @@
             el: '#app',
             data: {
                 txt: '',
-                tableau: []
+                tableau: [],
+                elms: ['premier', 'deuxième', 'troisième', 'quatrième']
             },
             methods: {
                 send: function() {
                     this.tableau.push(this.txt)
                     this.txt = ''
+                },
+                supprime: function(index) {
+                    this.elms.splice(index, 1)
                 }
             }
         });
