@@ -6,25 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <style>
-        [v-cloak] {
-            display: none;
-        }
-    </style>
 </head>
 
 <body>
     <div id="app">
-        <div v-cloak>
-            {{texte}}
-        </div>
+        <p v-once>avec v-once : {{nombre}}</p>
+        <p>sans v-once : {{nombre}}</p>
+        <input type="button" value="clic" @click="nombre++">
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                txt: ''
+                nombre: 15
             },
             methods: {
 
