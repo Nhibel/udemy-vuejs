@@ -11,24 +11,20 @@
 <body>
     <div id="app">
         <rnd-loc></rnd-loc>
-        <compteur></compteur>
     </div>
 
     <script>
-        Vue.component('compteur', {
-            template: '<button type="button" @click="nbrClics++">{{nbrClics}}</button>',
-            data: function () {
-                return {
-                    nbrClics: 0
-                }
-            }
-        });
-
         var rndLoc = {
-            template: '<div>{{nombre}}</div>',
+            template: '<div> {{nombre}} <button @click="clic">Nouveau</button></div>',
             data: function () {
                 return {
-                    nombre: Math.floor(Math.random() * 100 + 1)
+                    nombre: Math.floor(Math.random() * 100 + 1),
+                    nbr: 0
+                }
+            },
+            methods: {
+                clic: function () {
+                    this.nombre = Math.floor(Math.random() * 100 + 1);
                 }
             }
         }
