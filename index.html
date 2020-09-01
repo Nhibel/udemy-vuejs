@@ -10,29 +10,45 @@
 
 <body>
     <div id="app">
-        <rnd-loc></rnd-loc>
+        <taille param="Petit"></taille>
+
+        <comp texte="Jean"></comp>
+        <comp texte="Pierre"></comp>
+        <comp texte="Michel"></comp>
+
+        <taille-global texte="Bidule">
+
+
     </div>
 
     <script>
-        var rndLoc = {
-            template: '<div> {{nombre}} <button @click="clic">Nouveau</button></div>',
+        // Composant global
+        Vue.component("taille", {
+            template: "<div>la taille est : {{param}}</div>",
+            props: ["param"]
+        })
+
+        Vue.component("taille-global", {
+            template: '<div>Bonjour {{texte}}</div>',
+            props: ["texte"]
+        })
+
+        // Composant local
+        var comp = {
+            template: '<div>Bonjour {{texte}}</div>',
+            props: ["texte"],
             data: function () {
-                return {
-                    nombre: Math.floor(Math.random() * 100 + 1),
-                    nbr: 0
-                }
+                return {}
             },
             methods: {
-                clic: function () {
-                    this.nombre = Math.floor(Math.random() * 100 + 1);
-                }
+
             }
         }
 
-        new Vue({
+        var vm = new Vue({
             el: '#app',
             components: {
-                'rnd-loc': rndLoc
+                'comp': comp
             }
         })
     </script>
