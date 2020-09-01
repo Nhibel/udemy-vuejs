@@ -10,19 +10,22 @@
 
 <body>
     <div id="app">
-        <bonjour></bonjour>
-        <bonjour></bonjour>
-        <bonjour></bonjour>
-        <bonjour />
+        <bonjour-loc></bonjour-loc>
+        <bonjour-loc></bonjour-loc>
+        <bonjour-loc></bonjour-loc>
+        <bonjour-loc />
     </div>
 
     <script>
-        Vue.component('bonjour', {
-            template: '<div>Bonjour</div>'
-        });
+        var BonjourLocal = {
+            template: '<div>Le composant local dit Bonjour</div>'
+        }
 
         new Vue({
-            el: '#app'
+            el: '#app',
+            components: {
+                'bonjour-loc': BonjourLocal
+            }
         })
     </script>
 </body>
