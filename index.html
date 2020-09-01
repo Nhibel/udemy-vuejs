@@ -10,39 +10,19 @@
 
 <body>
     <div id="app">
-        <comp texte="Un petit texte d'exemple"></comp>
-
-        <rnd-loc max=10></rnd-loc>
-        <rnd-loc max=100></rnd-loc>
-        <rnd-loc max=1000></rnd-loc>
-        <rnd-loc max=10000></rnd-loc>
+        <taille v-bind:mess="message"></taille>
     </div>
 
     <script>
-        var rndLoc = {
-            template: '<div>{{nbr}}</div>',
-            props: ['max'],
-            data: function () {
-                return {
-                    nbr: Math.floor(Math.random() * this.max + 1)
-                }
-            }
-        }
-
-        Vue.component('comp', {
-            props: ['texte'],
-            template: '<div>{{maj}}</div>',
-            data: function () {
-                return {
-                    maj: this.texte.toUpperCase()
-                }
-            }
+        Vue.component('taille', {
+            props: ['mess'],
+            template: '<div>{{mess}}</div>',
         })
 
         var vm = new Vue({
             el: '#app',
-            components: {
-                'rnd-loc': rndLoc
+            data: {
+                'message': 'Message de la vue pour le composant taille'
             }
         })
     </script>
