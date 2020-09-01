@@ -10,21 +10,33 @@
 
 <body>
     <div id="app">
-        <bonjour-loc></bonjour-loc>
-        <bonjour-loc></bonjour-loc>
-        <bonjour-loc></bonjour-loc>
-        <bonjour-loc />
+        <rnd-loc></rnd-loc>
+        <compteur></compteur>
     </div>
 
     <script>
-        var BonjourLocal = {
-            template: '<div>Le composant local dit Bonjour</div>'
+        Vue.component('compteur', {
+            template: '<button type="button" @click="nbrClics++">{{nbrClics}}</button>',
+            data: function () {
+                return {
+                    nbrClics: 0
+                }
+            }
+        });
+
+        var rndLoc = {
+            template: '<div>{{nombre}}</div>',
+            data: function () {
+                return {
+                    nombre: Math.floor(Math.random() * 100 + 1)
+                }
+            }
         }
 
         new Vue({
             el: '#app',
             components: {
-                'bonjour-loc': BonjourLocal
+                'rnd-loc': rndLoc
             }
         })
     </script>
