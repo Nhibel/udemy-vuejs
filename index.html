@@ -6,46 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <style>
-        li {
-            list-style-type: none;
-        }
-    </style>
-
 </head>
 
 <body>
     <div id="app">
-        <input type="text" v-model="langage">
-        <input type="button" value="Ajouter" @click="ajouter">
-        <br>
-        <ul>
-            <li v-for="el in liste">
-                <input type="checkbox" @click="el.coche=!el.coche">
-                {{el.langage}} est <span v-if="el.coche">coché</span> <span v-else="!el.coche">décoché</span>
-            </li>
-        </ul>
+        <bonjour></bonjour>
+        <bonjour></bonjour>
+        <bonjour></bonjour>
+        <bonjour />
     </div>
 
-
-
-
     <script>
-        var vm = new Vue({
-            el: '#app',
-            data: {
-                langage: '',
-                liste: []
-            },
-            methods: {
-                ajouter: function () {
-                    this.liste.push({
-                        langage: this.langage,
-                        coche: false
-                    });
-                }
-            }
+        Vue.component('bonjour', {
+            template: '<div>Bonjour</div>'
         });
+
+        new Vue({
+            el: '#app'
+        })
     </script>
 </body>
 
