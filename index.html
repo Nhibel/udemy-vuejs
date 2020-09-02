@@ -6,56 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
     <div id="app">
-        <!-- increm appelle une méthode dans le vm pour augmenter le total tot -->
-        <compteur @increm="total"></compteur>
-        <compteur @increm="total"></compteur>
-        <compteur @increm="total"></compteur>
-        <br>
-        {{tot}}
+        <table>
+            <tr v-for="user in users">
+                <td><img :src='user.picture.medium'></td>
+                <td>
+                    {{user.name.first}} {{user.name.last}}<br>
+                    {{user.email}}<br>
+                    {{user.phone}}
+                </td>
+            </tr>
+        </table>
+
     </div>
 
     <script>
-        var compteur = {
-            // chaque clics augmente la valeur du btn
-            template: "<button @click='plusUn'>{{valeur}}</button>",
-
-            data: function () {
-                return {
-                    valeur: 0
-                }
-            },
-
-            // dans la méthode plusUn, un emit permet à la vue d'appeler une méthode
-            methods: {
-                plusUn: function () {
-                    this.valeur++;
-                    this.$emit('increm')
-                }
-            }
-
-        }
-
         var vm = new Vue({
             el: '#app',
-
             data: {
-                tot: 0
+                url: 'https://randomuser.me/api/?results=3',
+                users: []
             },
-
-            methods: {
-                // a chaque emit appelant cette méthode, le total est incrémenté
-                total: function () {
-                    this.tot++
-                }
-            },
-
-            // appel d'un component local
-            components: {
-                'compteur': compteur
+            created: function () {
+                axios.get(this.url).then(function (reponse) {
+                    vm.users = reponse.data.results;
+                })
             }
         })
     </script>
