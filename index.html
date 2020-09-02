@@ -10,19 +10,52 @@
 
 <body>
     <div id="app">
-        <taille v-bind:mess="message"></taille>
+        <!-- increm appelle une méthode dans le vm pour augmenter le total tot -->
+        <compteur @increm="total"></compteur>
+        <compteur @increm="total"></compteur>
+        <compteur @increm="total"></compteur>
+        <br>
+        {{tot}}
     </div>
 
     <script>
-        Vue.component('taille', {
-            props: ['mess'],
-            template: '<div>{{mess}}</div>',
-        })
+        var compteur = {
+            // chaque clics augmente la valeur du btn
+            template: "<button @click='plusUn'>{{valeur}}</button>",
+
+            data: function () {
+                return {
+                    valeur: 0
+                }
+            },
+
+            // dans la méthode plusUn, un emit permet à la vue d'appeler une méthode
+            methods: {
+                plusUn: function () {
+                    this.valeur++;
+                    this.$emit('increm')
+                }
+            }
+
+        }
 
         var vm = new Vue({
             el: '#app',
+
             data: {
-                'message': 'Message de la vue pour le composant taille'
+                tot: 0
+            },
+
+            methods: {
+                // a chaque emit appelant cette méthode, le total est incrémenté
+                total: function () {
+                    this.tot++
+                }
+            },
+
+            // appel d'un component local
+            components: {
+                'compteur': compteur
             }
         })
     </script>
