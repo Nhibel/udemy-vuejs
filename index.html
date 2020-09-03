@@ -11,21 +11,23 @@
 
 <body>
     <div id="app">
-        <art titre="Titre de l'article">
-            <template v-slot:texte>
-                <p>Texte de l'article</p>
+        <enfant :d="d">
+            <template v-slot:sl='{dat}'>
+                {{dat}}
             </template>
-            <p>Ce texte est intégré dans le slot default</p>
-        </art>
+        </enfant>
     </div>
 
     <script>
-        Vue.component('art', {
-            template: '<div><h2>{{titre}}</h2><slot name="texte"></slot><slot name="default"></slot></div>',
-            props: ['titre']
+        Vue.component('enfant', {
+            template: '<div><slot name="sl" :dat="d"></slot></div>',
+            props: ['d']
         })
         new Vue({
             el: '#app',
+            data: {
+                d: 'données à passer au composant'
+            }
         })
     </script>
 </body>
