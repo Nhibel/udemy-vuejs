@@ -12,13 +12,16 @@
 <body>
     <div id="app">
         <art titre="Titre de l'article">
-            <p>Texte de l'article</p>
+            <template v-slot:texte>
+                <p>Texte de l'article</p>
+            </template>
+            <p>Ce texte est intégré dans le slot default</p>
         </art>
     </div>
 
     <script>
         Vue.component('art', {
-            template: '<div><h2>{{titre}}</h2><slot></slot></div>',
+            template: '<div><h2>{{titre}}</h2><slot name="texte"></slot><slot name="default"></slot></div>',
             props: ['titre']
         })
         new Vue({
