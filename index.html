@@ -7,28 +7,43 @@
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
-        img {
-            transition: opacity 1s ease-in;
+        .t-enter,
+        .t-leave-to {
+            opacity: 0;
+        }
+
+        .t-enter-active,
+        .t-leave-active {
+            transition: opacity 1s;
         }
     </style>
-    <script>
-        function cacherAfficher() {
-            var ima = document.getElementById("chat");
-            var bout = document.getElementById("bouton");
-            if (bouton.innerHTML == 'Cacher') {
-                bout.innerHTML = 'Afficher';
-                ima.setAttribute('style', 'opacity: 0;')
-            } else {
-                bout.innerHTML = 'Cacher';
-                ima.setAttribute('style', 'opacity: 1;')
-            }
-        }
-    </script>
 </head>
 
 <body>
-    <button id="bouton" onclick="cacherAfficher();">Cacher</button><br>
-    <img src="images/petit-chat.jpg" id="chat">
+    <div id="app">
+
+        <button @click="visible=!visible;">
+            <span v-if="visible">Cacher</span>
+            <span v-else>Afficher</span>
+        </button>
+
+
+        <transition name="t">
+            <div v-if="visible">
+                <img src="images/petit-chat.jpg" id="chat">
+            </div>
+        </transition>
+    </div>
+
 </body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            visible: true
+        },
+    })
+</script>
+
 
 </html>
