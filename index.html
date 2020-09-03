@@ -10,39 +10,45 @@
 
 <body>
     <div id="app">
-        <div>Texte original : {{texte}}</div>
-        <div>Texte inversé : {{texteInverse}}</div>
-
-
-        <input type="text" v-model="prenom" placeholder="Prénom"> <input type="text" v-model="nom" placeholder="Nom">
-
-        <input type="button" value="Afficher le nom complet" @click="affiche">
-
-        <div>{{complet}}</div>
+        <h1>{{compteur}}</h1>
+        <input type="button" @click="compteur++" value="Ajouter">
+        <br>
+        <br>
+        <br>
+        <input type="text" v-model="texte">
+        <p>{{message}}</p>
     </div>
+
+
 
     <script>
         new Vue({
             el: '#app',
             data: {
-                texte: 'Propriété calculée',
-                prenom: '',
-                nom: '',
-                complet: ''
+                compteur: 0,
+                texte: '',
+                message: ''
             },
             methods: {
-                affiche: function () {
-                    this.complet = this.nomPrenom;
-                }
+
             },
             computed: {
-                texteInverse: function () {
-                    return this.texte.split('').reverse().join('');
-                },
-                nomPrenom: function () {
-                    return this.nom + ' ' + this.prenom
-                }
+
             },
+            watch: {
+                compteur: function (valeur) {
+                    if (this.compteur > 10) {
+                        this.compteur = 0
+                    }
+                },
+                texte: function (valeur) {
+                    if (valeur.indexOf("ici") != -1) {
+                        this.message = "Le texte contient le mot 'ici'"
+                    } else {
+                        this.message = '';
+                    }
+                }
+            }
         })
     </script>
 </body>
