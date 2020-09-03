@@ -11,22 +11,30 @@
 
 <body>
     <div id="app">
-        <enfant :d="d">
-            <template v-slot:sl='{dat}'>
-                {{dat}}
+        <liste v-bind:articles="articles">
+            <template v-slot:les-articles="{unArt}">
+                <h2>{{unArt.titre}}</h2>
+                <p>{{unArt.texte}}</p>
             </template>
-        </enfant>
+        </liste>
     </div>
 
     <script>
-        Vue.component('enfant', {
-            template: '<div><slot name="sl" :dat="d"></slot></div>',
-            props: ['d']
+        Vue.component('liste', {
+            template: '<div><h1>Les derniers articles</h1>\
+            <div v-for="art in articles"><slot name="les-articles" v-bind:unArt="art"></slot></div></div>',
+            props: ['articles']
         })
         new Vue({
             el: '#app',
             data: {
-                d: 'données à passer au composant'
+                articles: [{
+                    titre: "Article 1",
+                    texte: "texte de l'article 1"
+                }, {
+                    titre: "Article 2",
+                    texte: "texte de l'article 2"
+                }]
             }
         })
     </script>
