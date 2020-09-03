@@ -11,50 +11,18 @@
 
 <body>
     <div id="app">
-        <!-- le composant tous est bindé aux données du viewModel, le :bind "users" contient le tableau d'utilisateurs -->
-        <tous :users="donnees"></tous>
+        <art titre="Titre de l'article">
+            <p>Texte de l'article</p>
+        </art>
     </div>
 
     <script>
-        // Ce composant affiche un utilisateur, récupéré via le props usr
-        var un = {
-            template: '<tr>\
-            <td><img :src="usr.picture.medium"></td>\
-            <td>\
-            {{usr.name.first}} {{usr.name.last}}<br>\
-            {{usr.email}}<br>\
-            {{usr.phone}}\
-            </td></tr>',
-            props: ['usr']
-        }
-
-        // Le propos permet de récupérer le tableau d'utilisateurs, défini dans le create, transmi par la partie HTML lors de l'appel du composant
-        // ce composant appel à son tour le composant "un"
-        // via une boucle v-for, il lui transmet un utilisateur par tour via le bind usr
-        var tous = {
-            template: '<div> <table v-for="user in users"> <un :usr="user"> </un> </table> </div>',
-            props: ['users'],
-            components: {
-                'un': un
-            }
-        }
-
-        var vm = new Vue({
+        Vue.component('art', {
+            template: '<div><h2>{{titre}}</h2><slot></slot></div>',
+            props: ['titre']
+        })
+        new Vue({
             el: '#app',
-            data: {
-                url: 'https://randomuser.me/api/?results=10',
-                donnees: []
-            },
-            components: {
-                'tous': tous
-            },
-            created: function () {
-                // On interroge l'api randomuser.me pour obtenir 10 utilisateurs de façon aléatoire
-                axios.get(this.url).then(function (reponse) {
-                    // Réponse stockée dans le tableau donnees
-                    vm.donnees = reponse.data.results;
-                })
-            }
         })
     </script>
 </body>
