@@ -6,35 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
     <div id="app">
-        <liste v-bind:articles="articles">
-            <template v-slot:les-articles="{unArt}">
-                <h2>{{unArt.titre}}</h2>
-                <p>{{unArt.texte}}</p>
-            </template>
-        </liste>
+        <p>Rentrez un texte</p>
+        <input type="text" v-model="texte"></input>
+
+        <div>Filtre global : {{texte | capitaliser}}</div>
+
+        <div>Filtre local : {{texte | cap}}</div>
+
     </div>
 
+
+
     <script>
-        Vue.component('liste', {
-            template: '<div><h1>Les derniers articles</h1>\
-            <div v-for="art in articles"><slot name="les-articles" v-bind:unArt="art"></slot></div></div>',
-            props: ['articles']
+        // Filtre global
+        Vue.filter('capitaliser', function (valeur) {
+            var t = valeur.split(' ');
+            for (var i = 0; i < t.length; i++) {
+                t[i] = t[i].slice(0, 1).toUpperCase() + t[i].slice(1);
+            }
+            return t.join(' ');
         })
-        new Vue({
+
+        var vm = new Vue({
             el: '#app',
             data: {
-                articles: [{
-                    titre: "Article 1",
-                    texte: "texte de l'article 1"
-                }, {
-                    titre: "Article 2",
-                    texte: "texte de l'article 2"
-                }]
+                texte: ''
+            },
+            // Filtre local
+            filters: {
+                cap: function (valeur) {
+                    var t = valeur.split(' ');
+                    for (var i = 0; i < t.length; i++) {
+                        t[i] = t[i].slice(0, 1).toUpperCase() + t[i].slice(1);
+                    }
+                    return t.join(' ');
+                }
             }
         })
     </script>
