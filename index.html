@@ -7,6 +7,11 @@
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
+        label {
+            display: inline-block;
+            width: 5rem;
+        }
+
         .t-enter,
         .t-leave-to {
             opacity: 0;
@@ -14,7 +19,7 @@
 
         .t-enter-active,
         .t-leave-active {
-            transition: opacity 1s;
+            transition: opacity 2s;
         }
     </style>
 </head>
@@ -22,17 +27,24 @@
 <body>
     <div id="app">
 
-        <button @click="visible=!visible;">
-            <span v-if="visible">Cacher</span>
-            <span v-else>Afficher</span>
-        </button>
+        <input type="radio" value="mr" id="mr" name="civ" @click="mme=false" checked> Mr
 
+        <input type="radio" value="mme" id="mme" name="civ" @click="mme=true"> Mme <br>
+
+
+        <label>Prénom</label>
+        <input type="text" name="prenom"><br>
+
+        <label>Nom</label>
+        <input type="text" name="nom"><br>
 
         <transition name="t">
-            <div v-if="visible">
-                <img src="images/petit-chat.jpg" id="chat">
+            <div v-if="mme">
+                <label>Nom de jeune fille</label>
+                <input type="text" name="njf"><br>
             </div>
         </transition>
+
     </div>
 
 </body>
@@ -40,7 +52,7 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            visible: true
+            mme: false
         },
     })
 </script>
