@@ -10,22 +10,17 @@
 
 <body>
     <div id="app">
-        <h1>{{compteur}}</h1>
-        <input type="button" @click="compteur++" value="Ajouter">
-        <br>
-        <br>
-        <br>
-        <input type="text" v-model="texte">
-        <p>{{message}}</p>
+        <input type="text" v-model="texte" placeholder="Tape tape tape du texte">
+        <div v-show="affiche">Frappe en cours...</div>
     </div>
 
 
 
     <script>
-        new Vue({
+        var vm = new Vue({
             el: '#app',
             data: {
-                compteur: 0,
+                affiche: false,
                 texte: '',
                 message: ''
             },
@@ -36,17 +31,11 @@
 
             },
             watch: {
-                compteur: function (valeur) {
-                    if (this.compteur > 10) {
-                        this.compteur = 0
-                    }
-                },
                 texte: function (valeur) {
-                    if (valeur.indexOf("ici") != -1) {
-                        this.message = "Le texte contient le mot 'ici'"
-                    } else {
-                        this.message = '';
-                    }
+                    vm.affiche = true
+                    setTimeout(function () {
+                        vm.affiche = false
+                    }, 3000);
                 }
             }
         })
