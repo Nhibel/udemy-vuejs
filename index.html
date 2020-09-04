@@ -6,37 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <style>
-        h1 {
-            position: absolute;
-            top: 2rem;
-            left: 1rem;
-        }
-
-        .t-enter,
-        .t-leave-to {
-            opacity: 0;
-        }
-
-        .t-enter-active,
-        .t-leave-active {
-            transition: opacity 1s ease;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 </head>
 
 <body>
     <div id="app">
-        <input v-model="fruit" placeholder="Ajouter un fruit">
-        <button @click="ajouterFruit">Ajouter un fruit</button>
-        <button @click="supprimerFruit">Supprimer un fruit</button>
-        <br>
 
-        <transition-group name="t" mode="in-out">
-            <span v-for="fruit in fruits" :key="fruit">
-                {{fruit}}
-            </span>
-            </transition>
+        <button @click="anime=!anime">Changer</button>
+
+        <transition enter-active-class="animate__animated animate__bounceInLeft"
+            leave-active-class="animate__animated animate__hinge">
+            <h1 v-if="anime">Titre H1</h1>
+        </transition>
 
     </div>
 
@@ -45,24 +26,8 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            fruits: ['bananes', 'pommes', 'poires'],
-            fruit: ''
+            anime: false
         },
-        methods: {
-            ajouterFruit: function () {
-                if (this.fruit) {
-                    this.fruits.push(this.fruit);
-                    this.fruit = ''
-                }
-
-            },
-            supprimerFruit: function () {
-                if (this.fruits.length > 0) {
-                    this.fruits.shift()
-                }
-
-            }
-        }
     })
 </script>
 
