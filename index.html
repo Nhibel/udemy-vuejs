@@ -6,17 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.6/velocity.js"></script>
 </head>
 
 <body>
     <div id="app">
 
-        <button @click="anime=!anime">Changer</button>
+        <button @click="anime=!anime">Animer le texte</button>
 
-        <transition enter-active-class="animate__animated animate__bounceInLeft"
-            leave-active-class="animate__animated animate__hinge">
-            <h1 v-if="anime">Titre H1</h1>
+        <transition v-on:enter="traitement" v-on:leave="traitementExit" :css="false">
+            <h1 v-if="anime">Texte à animer</h1>
         </transition>
 
     </div>
@@ -28,6 +27,30 @@
         data: {
             anime: false
         },
+        methods: {
+            traitement: function (el, done) {
+                Velocity(el, {
+                    transform: ['translateX(20rem)', 'translateX(0rem)'],
+                    fontSize: ['4rem', '1rem'],
+                    opacity: ['1', '0']
+                }, {
+                    duration: 200,
+                    easing: 'ease-out',
+                    complete: done
+                })
+            },
+            traitementExit: function (el, done) {
+                Velocity(el, {
+                    transform: ['translateX(0rem)', 'translateX(20rem)'],
+                    fontSize: ['1rem', '4rem'],
+                    opacity: ['0', '1']
+                }, {
+                    duration: 200,
+                    easing: 'ease-out',
+                    complete: done
+                })
+            }
+        }
     })
 </script>
 
