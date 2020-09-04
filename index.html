@@ -19,7 +19,7 @@
 
         .t-enter-active,
         .t-leave-active {
-            transition: opacity 2s;
+            transition: opacity 1s ease;
         }
     </style>
 </head>
@@ -27,21 +27,18 @@
 <body>
     <div id="app">
 
-        <input type="radio" value="mr" id="mr" name="civ" @click="mme=false" checked> Mr
+        <button type="button" @click="label=!label">
+            <span v-if="label">Afficher texte 2</span>
+            <span v-else>Afficher texte 1</span>
+        </button>
 
-        <input type="radio" value="mme" id="mme" name="civ" @click="mme=true"> Mme <br>
+        <transition name="t" mode="out-in">
+            <div v-if="label" key="1">
+                <p>Mon premier texte</p>
+            </div>
 
-
-        <label>Prénom</label>
-        <input type="text" name="prenom"><br>
-
-        <label>Nom</label>
-        <input type="text" name="nom"><br>
-
-        <transition name="t">
-            <div v-if="mme">
-                <label>Nom de jeune fille</label>
-                <input type="text" name="njf"><br>
+            <div v-else key="2">
+                <p>Mon deuxième texte</p>
             </div>
         </transition>
 
@@ -52,7 +49,7 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            mme: false
+            label: false
         },
     })
 </script>
