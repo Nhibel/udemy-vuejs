@@ -20,24 +20,23 @@
 
         .t-enter-active,
         .t-leave-active {
-            transition: opacity 2s ease;
+            transition: opacity 1s ease;
         }
     </style>
 </head>
 
 <body>
     <div id="app">
+        <input v-model="fruit" placeholder="Ajouter un fruit">
+        <button @click="ajouterFruit">Ajouter un fruit</button>
+        <button @click="supprimerFruit">Supprimer un fruit</button>
+        <br>
 
-        <button type="button" @click="compteur<4?compteur++:compteur=1">
-            <span>Animer le texte</span>
-        </button>
-
-        <transition name="t" mode="in-out">
-            <h1 v-if="compteur==1" key="t1">Titre 1</h1>
-            <h1 v-if="compteur==2" key="t2">Titre 2</h1>
-            <h1 v-if="compteur==3" key="t3">Titre 3</h1>
-            <h1 v-if="compteur==4" key="t4">Titre 4</h1>
-        </transition>
+        <transition-group name="t" mode="in-out">
+            <span v-for="fruit in fruits" :key="fruit">
+                {{fruit}}
+            </span>
+            </transition>
 
     </div>
 
@@ -46,8 +45,24 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            compteur: 0,
+            fruits: ['bananes', 'pommes', 'poires'],
+            fruit: ''
         },
+        methods: {
+            ajouterFruit: function () {
+                if (this.fruit) {
+                    this.fruits.push(this.fruit);
+                    this.fruit = ''
+                }
+
+            },
+            supprimerFruit: function () {
+                if (this.fruits.length > 0) {
+                    this.fruits.shift()
+                }
+
+            }
+        }
     })
 </script>
 
