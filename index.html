@@ -6,53 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.6/velocity.js"></script>
 </head>
 
 <body>
     <div id="app">
-
-        <button @click="anime=!anime">Animer le texte</button>
-
-        <transition v-on:enter="traitement" v-on:leave="traitementExit" :css="false">
-            <h1 v-if="anime">Texte à animer</h1>
-        </transition>
-
+        <art>
+            <template v-slot:titre>
+                <h1>Titre de l'article</h1>
+            </template>
+            <p>
+                Un simple texte en dehors d'un slot nommé
+            </p>
+            <template v-slot:bas>
+                <p>Bas de l'article</p>
+            </template>
+            <p>
+                Un autre texte en dehors d'un slot nommé
+            </p>
+        </art>
     </div>
 
-</body>
-<script>
-    var vm = new Vue({
-        el: '#app',
-        data: {
-            anime: false
-        },
-        methods: {
-            traitement: function (el, done) {
-                Velocity(el, {
-                    transform: ['translateX(20rem)', 'translateX(0rem)'],
-                    fontSize: ['4rem', '1rem'],
-                    opacity: ['1', '0']
-                }, {
-                    duration: 200,
-                    easing: 'ease-out',
-                    complete: done
-                })
-            },
-            traitementExit: function (el, done) {
-                Velocity(el, {
-                    transform: ['translateX(0rem)', 'translateX(20rem)'],
-                    fontSize: ['1rem', '4rem'],
-                    opacity: ['0', '1']
-                }, {
-                    duration: 200,
-                    easing: 'ease-out',
-                    complete: done
-                })
+    <script>
+        var Art = {
+            render: function (createElement) {
+                var titre = "this.$slots.titre";
+                var corps = this.$slots.default;
+                var bas = this.$slots.bas;
+                console.log(corps);
+                return createElement('div', [
+                    createElement('header', titre),
+                    createElement('main', corps),
+                    createElement('footer', bas)
+                ]);
             }
-        }
-    })
-</script>
-
+        };
+        var vm = new Vue({
+            el: '#app',
+            components: {
+                art: Art
+            }
+        })
+    </script>
+</body>
 
 </html>
