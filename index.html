@@ -10,40 +10,22 @@
 
 <body>
     <div id="app">
-        <art>
-            <template v-slot:titre>
-                <h1>Titre de l'article</h1>
-            </template>
-            <p>
-                Un simple texte en dehors d'un slot nommé
-            </p>
-            <template v-slot:bas>
-                <p>Bas de l'article</p>
-            </template>
-            <p>
-                Un autre texte en dehors d'un slot nommé
-            </p>
-        </art>
+        <titre niveau="1">Titre de niveau 1</titre>
+        <titre niveau="2">Titre de niveau 2</titre>
+        <titre niveau="3">Titre de niveau 3</titre>
     </div>
 
     <script>
-        var Art = {
+        var Titre = {
             render: function (createElement) {
-                var titre = "this.$slots.titre";
-                var corps = this.$slots.default;
-                var bas = this.$slots.bas;
-                console.log(corps);
-                return createElement('div', [
-                    createElement('header', titre),
-                    createElement('main', corps),
-                    createElement('footer', bas)
-                ]);
-            }
+                return createElement('h' + this.niveau, this.$slots.default);
+            },
+            props: ['niveau']
         };
         var vm = new Vue({
             el: '#app',
             components: {
-                art: Art
+                titre: Titre
             }
         })
     </script>
