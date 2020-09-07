@@ -10,25 +10,21 @@
 
 <body>
     <div id="app">
-        <titre niveau="1">Titre de niveau 1</titre>
-        <titre niveau="2">Titre de niveau 2</titre>
-        <titre niveau="3">Titre de niveau 3</titre>
+        <bouton></bouton>
     </div>
 
     <script>
-        var Titre = {
+        var Bouton = {
+            functionnal: true,
             render: function (createElement) {
-                return createElement('h' + this.niveau, this.$slots.default);
-            },
-            props: ['niveau']
-        };
-        var vm = new Vue({
+                return createElement('button', 'Cliquez-moi')
+            }
+        }
+        new Vue({
             el: '#app',
             components: {
-                titre: Titre
+                bouton: Bouton
             }
         })
     </script>
-</body>
-
-</html>
+    <style></style>
