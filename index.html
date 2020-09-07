@@ -10,27 +10,34 @@
 
 <body>
     <div id="app">
-        <titre niveau="1">Titre de niveau 1</titre>
-        <titre niveau="2">Titre de niveau 2</titre>
-        <titre niveau="3">Titre de niveau 3</titre>
+        <bouton @click="affiche">Cliquez-moi</bouton>
     </div>
 
     <script>
-        var Titre = {
+        var Bouton = {
             functional: true,
             render: function (createElement, {
-                props,
-                children
+                children,
+                listeners
             }) {
-                return createElement("h" + props.niveau, children);
-            },
-            props: ['niveau']
-        }
-        new Vue({
+                return createElement(
+                    'button', {
+                        on: {
+                            click: listeners.click
+                        }
+                    },
+                    children);
+            }
+        };
+        var vm = new Vue({
             el: '#app',
             components: {
-                titre: Titre
+                bouton: Bouton
+            },
+            methods: {
+                affiche: function () {
+                    alert('le clic est remonté jusqu\'au parent');
+                }
             }
         })
     </script>
-    <style></style>
