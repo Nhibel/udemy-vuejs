@@ -35,7 +35,9 @@
             template: '<div>Une salade a été vendue <button @click="vendre">Vente</button></div>',
             methods: {
                 vendre: function () {
-                    return store.commit('vente')
+                    store.commit('vente')
+                    console.log(this.$store.state.salades);
+                    console.log(store.state.salades);
                 }
             }
         }
@@ -44,12 +46,13 @@
             template: '<div>10 salades ont été ajoutées au stock <button @click="reappro">Réapprovisionner</button></div>',
             methods: {
                 reappro: function () {
-                    return store.commit('reappro')
+                    store.commit('reappro')
                 }
             }
         }
         new Vue({
             el: '#app',
+            store,
             computed: {
                 actuel: function () {
                     return store.state.salades;
