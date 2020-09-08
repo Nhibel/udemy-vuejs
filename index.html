@@ -11,23 +11,24 @@
 
 <body>
     <div id="app">
-        <div v-hcouleur="{titre: 1, couleur: 'lightblue', texte: 'Titre H1 lightblue'}"></div>
-        <div v-hcouleur="{titre: 2, couleur: 'salmon', texte: 'Titre H2 salmon'}"></div>
-        <div v-hcouleur="{titre: 3, couleur: 'lightgreen', texte: 'Titre H3 lightgreen'}"></div>
+        <taille v-bind:param="valeur" param2="cm"></taille>
     </div>
 
     <script>
-        Vue.directive('hcouleur', {
-            bind: function (el, binding) {
-                el.innerHTML = '<h' + binding.value.titre + '>' + binding.value.texte + '</h' + binding
-                    .value.titre + '>'
-                el.style.background = binding.value.couleur
+        Vue.component('taille', {
+            template: '<div>La taille est : {{param}} {{param2}}</div>',
+            props: {
+                param: Number,
+                param2: {
+                    type: String,
+                    default: 'in'
+                }
             }
         })
         new Vue({
             el: '#app',
             data: {
-                message: 'Bonjour'
+                valeur: 10
             }
         })
     </script>
