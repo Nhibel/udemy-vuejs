@@ -11,14 +11,17 @@
 
 <body>
     <div id="app">
-        <div v-h1bleu="message"></div>
+        <div v-hcouleur="{titre: 1, couleur: 'lightblue', texte: 'Titre H1 lightblue'}"></div>
+        <div v-hcouleur="{titre: 2, couleur: 'salmon', texte: 'Titre H2 salmon'}"></div>
+        <div v-hcouleur="{titre: 3, couleur: 'lightgreen', texte: 'Titre H3 lightgreen'}"></div>
     </div>
 
     <script>
-        Vue.directive('h1bleu', {
+        Vue.directive('hcouleur', {
             bind: function (el, binding) {
-                el.innerHTML = '<h1>' + binding.value + '</h1>'
-                el.style.background = 'lightblue'
+                el.innerHTML = '<h' + binding.value.titre + '>' + binding.value.texte + '</h' + binding
+                    .value.titre + '>'
+                el.style.background = binding.value.couleur
             }
         })
         new Vue({
