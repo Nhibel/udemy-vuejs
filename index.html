@@ -11,41 +11,21 @@
 
 <body>
     <div id="app">
-        Nombre de salades {{actuel}}<br>
+        Nombre de salades : {{actuel.state.salades}}<br>
         <vente></vente>
         <reappro></reappro>
     </div>
 
     <script>
-        const plug = function (store) {
-            console.log('Appelé à l\'initialisation du store');
-            store.subscribe(function (mutation, state) {
-                console.log(mutation);
-                console.log(state);
-            })
-        }
-        const store = new Vuex.Store({
-            plugins: [plug],
-            state: {
-                salades: 20
-            },
-            mutations: {
-                vente: function (state) {
-                    console.log(store.state.salades);
-                    state.salades--;
-                    console.log(store.state.salades);
-                },
-                reappro: function (state) {
-                    state.salades += 10;
-                },
-            }
+        let state = Vue.observable({
+            salades: 20
         })
 
         const Vente = {
             template: '<div>Une salade a été vendue <button @click="vendre">Vente</button></div>',
             methods: {
                 vendre: function () {
-                    store.commit('vente')
+                    state.salades--;
                 }
             }
         }
@@ -54,16 +34,17 @@
             template: '<div>10 salades ont été ajoutées au stock <button @click="reappro">Réapprovisionner</button></div>',
             methods: {
                 reappro: function () {
-                    store.commit('reappro')
+                    state.salades += 10
                 }
             }
         }
         new Vue({
             el: '#app',
-            store,
             computed: {
                 actuel: function () {
-                    return store.state.salades;
+                    return {
+                        state
+                    }
                 },
             },
             methods: {},
