@@ -10,26 +10,21 @@
 </head>
 
 <body>
-    <div id="app">
-    </div>
+    <div id="app"></div>
 
     <script>
-        Vue.mixin({
-            created: function () {
-                const optionPerso = this.$options.option1
-                if (optionPerso) {
-                    console.log('OptionPerso vaut : ', optionPerso);
-                }
-            },
-            methods: {
-                bonjour: function () {
-                    console.log('Bonjour');
-                }
+        const monPlugin = {
+            install: function (Vue) {
+                Vue.mixin({
+                    mounted: function () {
+                        console.log('Monté');
+                    }
+                })
             }
-        })
+        }
+        Vue.use(monPlugin)
 
         new Vue({
             el: '#app',
-            option1: '15'
         })
     </script>
