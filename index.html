@@ -10,15 +10,15 @@
 </head>
 
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <bonjour></bonjour>
+    </div>
 
     <script>
         const monPlugin = {
             install: function (Vue) {
-                Vue.mixin({
-                    mounted: function () {
-                        console.log('Monté');
-                    }
+                Vue.component('bonjour', {
+                    template: '<div>Bonjour</div>'
                 })
             }
         }
