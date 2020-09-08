@@ -11,39 +11,54 @@
 
 <body>
     <div id="app">
-        Valeur actuelle {{actuel}}<br>
-        <button @click="plusUn">+1</button>
-        <button @click="moinsUn">-1</button>
+        Nombre de salades {{actuel}}<br>
+        <vente></vente>
+        <reappro></reappro>
     </div>
 
     <script>
         const store = new Vuex.Store({
             state: {
-                compteur: 0
+                salades: 20
             },
             mutations: {
-                increment: function (state) {
-                    state.compteur++;
+                vente: function (state) {
+                    state.salades--;
                 },
-                decrement: function (state) {
-                    state.compteur--;
-                }
+                reappro: function (state) {
+                    state.salades += 10;
+                },
             }
         })
+
+        const Vente = {
+            template: '<div>Une salade a été vendue <button @click="vendre">Vente</button></div>',
+            methods: {
+                vendre: function () {
+                    return store.commit('vente')
+                }
+            }
+        }
+
+        const Reappro = {
+            template: '<div>10 salades ont été ajoutées au stock <button @click="reappro">Réapprovisionner</button></div>',
+            methods: {
+                reappro: function () {
+                    return store.commit('reappro')
+                }
+            }
+        }
         new Vue({
             el: '#app',
             computed: {
                 actuel: function () {
-                    return store.state.compteur;
-                }
-            },
-            methods: {
-                plusUn: function () {
-                    return store.commit('increment')
+                    return store.state.salades;
                 },
-                moinsUn: function () {
-                    return store.commit('decrement')
-                }
+            },
+            methods: {},
+            components: {
+                'vente': Vente,
+                'reappro': Reappro
             }
         })
     </script>
