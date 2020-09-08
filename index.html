@@ -11,32 +11,55 @@
 
 <body>
     <div id="app">
-        <input type="texte" v-model="message">
+        <p v-if="errors.length">
+            <strong>Une ou plusieurs erreurs ont été détectées</strong>
+            <ul>
+                <li v-for="error in errors">{{error}}</li>
+            </ul>
+        </p>
+        <form v-on:submit="verif" action="https://www.bing.com" method="post">
+            <p>
+                <label for="name">Nom : </label>
+                <input type="text" name="name" id="name" v-model="name">
+            </p>
+
+            <p>
+                <label for="mail">Email : </label>
+                <input type="text" name="mail" id="mail" v-model="email">
+            </p>
+
+            <input type="submit" value="Envoyer">
+        </form>
+
     </div>
 
     <script>
-        const store = new Vuex.Store({
-            state: {
-                texte: ''
-            },
-            mutations: {
-                maj: function (state, payload) {
-                    state.texte = payload;
-                    console.log(state.texte);
-                }
-            }
-        })
         new Vue({
             el: '#app',
-            store,
-            computed: {
-                message: {
-                    get: function () {
-                        return this.$store.state.texte;
-                    },
-                    set: function (value) {
-                        this.$store.commit('maj', value);
+            data: {
+                name: '',
+                email: '',
+                errors: []
+            },
+            methods: {
+                valide: function (mail) {
+                    var ex = new RegExp(/^[a-z0-9.-]+@[a-z0-9._-]{2,}\.[a-z]{2,8}$/);
+                    return ex.test(mail);
+                },
+                verif: function (ev) {
+                    this.errors = [];
+                    if (!this.name) {
+                        this.errors.push('Le nom est obligatoire');
                     }
+                    if (!this.email) {
+                        this.errors.push('Le mail est obligatoire');
+                    } else if (!this.valide(this.email)) {
+                        this.errors.push('Le mail n\'est pas valide');
+                    }
+                    if (this.errors.length == 0) {
+                        return true
+                    }
+                    ev.preventDefault();
                 }
             }
         })
