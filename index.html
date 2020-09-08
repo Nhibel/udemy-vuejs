@@ -11,20 +11,22 @@
 
 <body>
     <div id="app">
-        <bonjour></bonjour>
     </div>
 
     <script>
         const monPlugin = {
             install: function (Vue) {
-                Vue.component('bonjour', {
-                    template: '<div>Bonjour</div>'
-                })
+                Vue.prototype.$bonjour = function () {
+                    return 'Bonjour'
+                }
             }
         }
-        Vue.use(monPlugin)
+        Vue.use(monPlugin);
 
         new Vue({
             el: '#app',
+            mounted: function () {
+                console.log(this.$bonjour());
+            }
         })
     </script>
