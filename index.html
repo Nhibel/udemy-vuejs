@@ -6,37 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squelette Vue.js</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex@2.0.0"></script>
 </head>
 
 <body>
     <div id="app">
-        <bouton @click="affiche">Cliquez-moi</bouton>
+        Valeur actuelle {{actuel}}<br>
+        <button @click="plusUn">+1</button>
+        <button @click="moinsUn">-1</button>
     </div>
 
     <script>
-        var Bouton = {
-            functional: true,
-            render: function (createElement, {
-                children,
-                listeners
-            }) {
-                return createElement(
-                    'button', {
-                        on: {
-                            click: listeners.click
-                        }
-                    },
-                    children);
+        const store = new Vuex.Store({
+            state: {
+                compteur: 0
+            },
+            mutations: {
+                increment: function (state) {
+                    state.compteur++;
+                },
+                decrement: function (state) {
+                    state.compteur--;
+                }
             }
-        };
-        var vm = new Vue({
+        })
+        new Vue({
             el: '#app',
-            components: {
-                bouton: Bouton
+            computed: {
+                actuel: function () {
+                    return store.state.compteur;
+                }
             },
             methods: {
-                affiche: function () {
-                    alert('le clic est remonté jusqu\'au parent');
+                plusUn: function () {
+                    return store.commit('increment')
+                },
+                moinsUn: function () {
+                    return store.commit('decrement')
                 }
             }
         })
