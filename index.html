@@ -11,46 +11,28 @@
 
 <body>
     <div id="app">
-        Nombre de salades : {{actuel.state.salades}}<br>
-        <vente></vente>
-        <reappro></reappro>
+        <input type="texte" v-on:input="updateMessage">
     </div>
 
     <script>
-        let state = Vue.observable({
-            salades: 20
+        const store = new Vuex.Store({
+            state: {
+                message: ''
+            },
+            mutations: {
+                maj: function (state, payload) {
+                    state.message = payload;
+                    console.log(state.message);
+                }
+            }
         })
-
-        const Vente = {
-            template: '<div>Une salade a été vendue <button @click="vendre">Vente</button></div>',
-            methods: {
-                vendre: function () {
-                    state.salades--;
-                }
-            }
-        }
-
-        const Reappro = {
-            template: '<div>10 salades ont été ajoutées au stock <button @click="reappro">Réapprovisionner</button></div>',
-            methods: {
-                reappro: function () {
-                    state.salades += 10
-                }
-            }
-        }
         new Vue({
             el: '#app',
-            computed: {
-                actuel: function () {
-                    return {
-                        state
-                    }
-                },
-            },
-            methods: {},
-            components: {
-                'vente': Vente,
-                'reappro': Reappro
+            store,
+            methods: {
+                updateMessage: function (event) {
+                    this.$store.commit('maj', event.target.value);
+                }
             }
         })
     </script>
