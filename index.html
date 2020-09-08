@@ -11,29 +11,25 @@
 
 <body>
     <div id="app">
-        <comp></comp>
     </div>
 
     <script>
-        var mixinBonjour = {
+        Vue.mixin({
             created: function () {
-                this.bonjour();
+                const optionPerso = this.$options.option1
+                if (optionPerso) {
+                    console.log('OptionPerso vaut : ', optionPerso);
+                }
             },
             methods: {
                 bonjour: function () {
                     console.log('Bonjour');
                 }
             }
-        }
-
-        const compAvecMixin = Vue.extend({
-            mixins: [mixinBonjour],
-            template: '<div>Ce composant utilise le mixin mixinBonjour</div>'
         })
+
         new Vue({
             el: '#app',
-            components: {
-                comp: compAvecMixin
-            }
+            option1: '15'
         })
     </script>
