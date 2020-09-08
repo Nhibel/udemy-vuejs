@@ -17,13 +17,23 @@
     </div>
 
     <script>
+        const plug = function (store) {
+            console.log('Appelé à l\'initialisation du store');
+            store.subscribe(function (mutation, state) {
+                console.log(mutation);
+                console.log(state);
+            })
+        }
         const store = new Vuex.Store({
+            plugins: [plug],
             state: {
                 salades: 20
             },
             mutations: {
                 vente: function (state) {
+                    console.log(store.state.salades);
                     state.salades--;
+                    console.log(store.state.salades);
                 },
                 reappro: function (state) {
                     state.salades += 10;
@@ -36,8 +46,6 @@
             methods: {
                 vendre: function () {
                     store.commit('vente')
-                    console.log(this.$store.state.salades);
-                    console.log(store.state.salades);
                 }
             }
         }
