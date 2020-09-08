@@ -11,27 +11,32 @@
 
 <body>
     <div id="app">
-        <input type="texte" v-on:input="updateMessage">
+        <input type="texte" v-model="message">
     </div>
 
     <script>
         const store = new Vuex.Store({
             state: {
-                message: ''
+                texte: ''
             },
             mutations: {
                 maj: function (state, payload) {
-                    state.message = payload;
-                    console.log(state.message);
+                    state.texte = payload;
+                    console.log(state.texte);
                 }
             }
         })
         new Vue({
             el: '#app',
             store,
-            methods: {
-                updateMessage: function (event) {
-                    this.$store.commit('maj', event.target.value);
+            computed: {
+                message: {
+                    get: function () {
+                        return this.$store.state.texte;
+                    },
+                    set: function (value) {
+                        this.$store.commit('maj', value);
+                    }
                 }
             }
         })
